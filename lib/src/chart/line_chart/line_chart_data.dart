@@ -47,6 +47,7 @@ class LineChartData extends AxisChartData with EquatableMixin {
     super.extraLinesData = const ExtraLinesData(),
     this.lineTouchData = const LineTouchData(),
     this.showingTooltipIndicators = const [],
+    this.isCandleStickChart = false,
     super.gridData = const FlGridData(),
     super.borderData,
     super.rangeAnnotations = const RangeAnnotations(),
@@ -83,6 +84,9 @@ class LineChartData extends AxisChartData with EquatableMixin {
   /// to show the tooltip manually, see [LineTouchData.handleBuiltInTouches].
   final List<ShowingTooltipIndicators> showingTooltipIndicators;
 
+  /// Determines if this LineChart should be rendered as a candlestick chart.
+  final bool isCandleStickChart;
+
   /// Lerps a [BaseChartData] based on [t] value, check [Tween.lerp].
   @override
   LineChartData lerp(BaseChartData a, BaseChartData b, double t) {
@@ -109,6 +113,7 @@ class LineChartData extends AxisChartData with EquatableMixin {
             lerpBetweenBarsDataList(a.betweenBarsData, b.betweenBarsData, t)!,
         lineTouchData: b.lineTouchData,
         showingTooltipIndicators: b.showingTooltipIndicators,
+        isCandleStickChart: b.isCandleStickChart,
       );
     } else {
       throw Exception('Illegal State');
@@ -135,6 +140,7 @@ class LineChartData extends AxisChartData with EquatableMixin {
     double? baselineY,
     FlClipData? clipData,
     Color? backgroundColor,
+    bool? isCandleStickChart,
   }) {
     return LineChartData(
       lineBarsData: lineBarsData ?? this.lineBarsData,
@@ -155,6 +161,7 @@ class LineChartData extends AxisChartData with EquatableMixin {
       baselineY: baselineY ?? this.baselineY,
       clipData: clipData ?? this.clipData,
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      isCandleStickChart: isCandleStickChart ?? this.isCandleStickChart,
     );
   }
 
